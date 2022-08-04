@@ -21,13 +21,14 @@ impl Display for Symbol {
     }
 }
 
+#[derive(Hash, PartialEq, Eq, PartialOrd, Ord, Debug)]
 pub struct SymbolPosition {
-    pub reel: u8,
-    pub row: u8,
+    pub reel: usize,
+    pub row: usize,
 }
 
 impl SymbolPosition {
-    pub fn new(reel: u8, row: u8) -> Self {
+    pub fn new(reel: usize, row: usize) -> Self {
         SymbolPosition { reel, row }
     }
 }

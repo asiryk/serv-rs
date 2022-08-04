@@ -35,8 +35,12 @@ impl<'a, S> Spinnable for ReelStrip<'a, S> {
 
 impl<'a, S> Reel<'a, S> for ReelStrip<'a, S> {
     /// Get symbol at row, starting from self.head.
-    fn get_symbol(&self, row: usize) -> &S {
-        &self.strip[self.get_strip_index(row)]
+    fn get_symbol(&self, row: usize) -> Option<&S> {
+        if row < self.visible_rows {
+            Some(self.strip[self.get_strip_index(row)])
+        } else {
+            None
+        }
     }
 
     /// Set symbol directly to reel strip.
@@ -48,7 +52,7 @@ impl<'a, S> Reel<'a, S> for ReelStrip<'a, S> {
     fn get_visible_symbols(&self) -> Vec<&S> {
         (0..self.visible_rows)
             .into_iter()
-            .map(|i| self.get_symbol(i))
+            .map(|i| self.get_symbol(i).unwrap())
             .collect()
     }
 }
