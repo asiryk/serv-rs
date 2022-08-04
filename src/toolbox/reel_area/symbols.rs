@@ -9,6 +9,10 @@ impl Symbol {
     pub fn new(name: String) -> Self {
         Symbol { name }
     }
+
+    pub fn get_name(&self) -> &str {
+        &self.name
+    }
 }
 
 impl Display for Symbol {
