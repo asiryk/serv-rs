@@ -1,6 +1,4 @@
-use crate::toolbox::reel_area::{Reel, ReelStrip, Spinnable, Symbol};
-
-mod toolbox;
+use serv_rs::toolbox::reel_area::{Reel, ReelStrip, Spinnable, Symbol};
 
 fn main() {
     let sym0 = Symbol::new(String::from("SYM0"));
