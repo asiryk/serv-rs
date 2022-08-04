@@ -20,7 +20,7 @@ pub mod reel_area {
 
     pub trait Reel<'a, S: 'a> {
         fn get_symbol(&self, row: usize) -> &S;
-        fn set_symbol(&mut self, row: usize, symbol: &S);
+        fn set_symbol(&mut self, row: usize, symbol: &'a S);
         fn get_visible_symbols(&self) -> Vec<&S>;
     }
 
@@ -64,15 +64,17 @@ pub mod reel_area {
         }
 
         impl<'a, S> Reel<'a, S> for ReelStrip<'a, S> {
+            /// Get symbol at row, starting from self.head.
             fn get_symbol(&self, row: usize) -> &S {
                 &self.strip[self.get_strip_index(row)]
             }
 
-            fn set_symbol(&mut self, _row: usize, _symbol: &S) {
-                todo!("gotta deal with lifetimes");
-                // self.strip.insert(self.get_strip_index(row), symbol);
+            /// Set symbol directly to reel strip.
+            fn set_symbol(&mut self, row: usize, symbol: &'a S) {
+                self.strip.insert(self.get_strip_index(row), symbol);
             }
 
+            /// Returns visible symbols of size self.visible_rows, starting from self.head.
             fn get_visible_symbols(&self) -> Vec<&S> {
                 (0..self.visible_rows)
                     .into_iter()

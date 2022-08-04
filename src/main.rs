@@ -12,9 +12,11 @@ fn main() {
 
     let mut strip = ReelStrip::new(vec![&sym0, &sym1, &sym2, &sym3, &sym4, &sym5], 3);
 
-    println!("{:?}", strip.get_visible_symbols());
+    println!("{:?}\n", strip);
+
+    strip.set_symbol(0, &sym0);
 
     strip.spin();
 
-    println!("{:?}", strip.get_visible_symbols());
+    println!("{:?}", strip);
 }
