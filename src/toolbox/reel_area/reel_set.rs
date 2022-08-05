@@ -1,12 +1,29 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, marker::PhantomData};
 
 use super::{Reel, Spinnable, SymbolPosition};
 
-pub struct ReelSet<'a, S: 'a> {
-    reels: Vec<Box<dyn Reel<'a, S>>>, // todo refactor to static dispatch
+pub struct ReelSet<'a, S: 'a, R>
+where
+    R: Reel<'a, S>,
+{
+    reels: Vec<R>,
+
+    /// I have no idea what am I doing, but seems it is possible
+    /// to avoid dynamic dispatch with PhantomData.
+    phantom: PhantomData<&'a S>,
 }
 
-impl<'a, S> ReelSet<'a, S> {
+impl<'a, S, R> ReelSet<'a, S, R>
+where
+    R: Reel<'a, S>,
+{
+    fn new(reels: Vec<R>) -> Self {
+        ReelSet {
+            reels,
+            phantom: PhantomData,
+        }
+    }
+
     fn get_visible_symbols(&'a self) -> HashMap<SymbolPosition, &'a S> {
         self.reels
             .iter()
