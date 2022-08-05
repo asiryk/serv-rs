@@ -2,6 +2,7 @@ mod reel_set;
 mod reel_strip;
 mod symbols;
 
+pub use reel_set::ReelSet;
 pub use reel_strip::ReelStrip;
 pub use symbols::Symbol;
 pub use symbols::SymbolPosition;

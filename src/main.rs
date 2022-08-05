@@ -1,4 +1,4 @@
-use serv_rs::toolbox::reel_area::{Reel, ReelStrip, Spinnable, Symbol};
+use serv_rs::toolbox::reel_area::{ReelSet, ReelStrip, Spinnable, Symbol};
 
 #[macro_use]
 extern crate lazy_static;
@@ -16,16 +16,17 @@ fn main() {
     let sym4 = Symbol::new(String::from("SYM4"));
     let sym5 = Symbol::new(String::from("SYM5"));
 
-    let mut reels: Vec<ReelStrip<Symbol>> = vec![
+    let mut reel_set = ReelSet::new(vec![
         ReelStrip::new(vec![&sym0, &sym1, &sym2, &sym3, &sym4, &sym5], 3),
         ReelStrip::new(vec![&sym0, &sym1, &sym2, &sym3, &sym4, &sym5], 3),
         ReelStrip::new(vec![&sym0, &sym1, &sym2, &sym3, &sym4, &sym5], 3),
-    ];
+    ]);
 
-    reels.iter_mut().for_each(|reel| reel.spin());
-    reels
-        .iter()
-        .for_each(|reel| println!("{:?}", reel.get_visible_symbols()));
+    println!("{:?}", reel_set.get_visible_symbols());
+
+    reel_set.spin();
+
+    println!("\n\n{:?}", reel_set.get_visible_symbols());
 
     println!("{}", &*SYM0);
 }
