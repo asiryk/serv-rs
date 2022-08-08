@@ -50,6 +50,10 @@ where
             reel.set_symbol(pos.row, symbol);
         }
     }
+
+    pub fn get_reels(&self) -> &Vec<R> {
+        &self.reels
+    }
 }
 
 impl<'a, S, R> Spinnable for ReelSet<'a, S, R>

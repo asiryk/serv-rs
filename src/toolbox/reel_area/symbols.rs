@@ -1,5 +1,16 @@
 use std::fmt::Display;
 
+// todo probably use Symbol as an Enum
+// e.g
+//
+// struct GameFeature;
+//
+// enum Symbol {
+//     SYM1,
+//     SYM2,
+//     SYM3(GameFeature),
+// }
+
 #[derive(Hash, PartialEq, Eq, Debug, Clone)]
 pub struct Symbol {
     name: String,
